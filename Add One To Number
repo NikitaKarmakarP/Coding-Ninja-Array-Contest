@@ -1,0 +1,27 @@
+#include <bits/stdc++.h> 
+vector<int> addOneToNumber(vector<int> arr)
+{
+    // Write your code here
+    int n = arr.size();
+
+    // Start adding from the last digit
+    int carry = 1; // Initially, the carry is 1 (as we are adding 1)
+    for (int i = n - 1; i >= 0; i--) {
+        int sum = arr[i] + carry;
+        arr[i] = sum % 10; // Update the digit
+        carry = sum / 10;  // Calculate carry for the next digit
+    }
+
+    // If there is still a carry left, add it at the beginning
+    if (carry > 0) {
+        arr.insert(arr.begin(), carry);
+    }
+
+    // Remove leading zeros from the output
+    while (arr.size() > 1 && arr[0] == 0) {
+        arr.erase(arr.begin());
+    }
+
+    return arr;
+
+}
