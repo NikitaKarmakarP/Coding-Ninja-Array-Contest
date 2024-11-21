@@ -1,0 +1,58 @@
+import java.util.*;
+
+public class Solution {
+
+    // Function to rotate the matrix anti-clockwise by 90 degrees
+    public static void inplaceRotate(int[][] arr, int n) {
+        // Step 1: Transpose the matrix (arr[i][j] <-> arr[j][i])
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                int temp = arr[i][j];
+                arr[i][j] = arr[j][i];
+                arr[j][i] = temp;
+            }
+        }
+
+        // Step 2: Reverse each column
+        for (int i = 0; i < n; i++) {
+            int left = 0, right = n - 1;
+            while (left < right) {
+                int temp = arr[left][i];
+                arr[left][i] = arr[right][i];
+                arr[right][i] = temp;
+                left++;
+                right--;
+            }
+        }
+    }
+
+    // Driver method to test the inplaceRotate function
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int T = sc.nextInt(); // Read number of test cases
+        
+        while (T-- > 0) {
+            int N = sc.nextInt(); // Read size of the matrix
+            int[][] arr = new int[N][N];
+            
+            // Input the matrix
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    arr[i][j] = sc.nextInt();
+                }
+            }
+            
+            // Rotate the matrix by 90 degrees anti-clockwise
+            inplaceRotate(arr, N);
+            
+            // Output the rotated matrix
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    System.out.print(arr[i][j] + " ");
+                }
+                System.out.println();
+            }
+        }
+        sc.close();
+    }
+}
